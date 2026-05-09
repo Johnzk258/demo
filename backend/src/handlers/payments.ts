@@ -62,7 +62,7 @@ export default function mountPaymentsEndpoints(router: Router) {
     await orderCollection.insertOne({
       pi_payment_id: paymentId,
       product_id: currentPayment.data.metadata.productId,
-      user: req.session.currentUser.uid,
+      user: req.session.currentUser?.uid || req.body.paymentId,
       txid: null,
       paid: false,
       cancelled: false,
