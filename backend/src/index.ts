@@ -84,17 +84,19 @@ app.get('/', async (_, res) => {
 
 // III. Boot up the app:
 
-app.listen(8000, async () => {
-  try {
-    const client = await MongoClient.connect(mongoUri, mongoClientOptions)
-    const db = client.db(dbName);
-    app.locals.orderCollection = db.collection('orders');
-    app.locals.userCollection = db.collection('users');
-    console.log('Connected to MongoDB on: ', mongoUri)
-  } catch (err) {
-    console.error('Connection to MongoDB failed: ', err)
-  }
-
+app.listen(8000, () => {
   console.log('App platform demo app - Backend listening on port 8000!');
   console.log(`CORS config: configured to respond to a frontend hosted on ${env.frontend_url}`);
+  console.log('MONGODB_URI:', mongoUri ? mongoUri.replace(/:([^@]+)@/, ':***@') : 'NOT SET');
+
+  MongoClient.connect(mongoUri, mongoClientOptions)
+    .then(client => {
+      const db = client.db(dbName);
+      app.locals.orderCollection = db.collection('orders');
+      app.locals.userCollection = db.collection('users');
+      console.log('Connected to MongoDB on: ', mongoUri.replace(/:([^@]+)@/, ':***@'));
+    })
+    .catch(err => {
+      console.error('Connection to MongoDB failed: ', err.message || err);
+    });
 });
