@@ -17,7 +17,7 @@ import mountUserEndpoints from './handlers/users';
 import "./types/session";
 
 const dbName = env.mongo_db_name;
-const mongoUri = `${env.mongodb_uri}/${dbName}`;
+const mongoUri = env.mongodb_uri;
 const mongoClientOptions = {};
 
 
