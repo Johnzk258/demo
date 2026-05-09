@@ -17,14 +17,9 @@ import mountUserEndpoints from './handlers/users';
 import "./types/session";
 
 const dbName = env.mongo_db_name;
-const mongoUri = `mongodb://${env.mongo_host}/${dbName}`;
-const mongoClientOptions = {
-  authSource: "admin",
-  auth: {
-    username: env.mongo_user,
-    password: env.mongo_password,
-  },
-}
+const mongoUri = `${env.mongodb_uri}/${dbName}`;
+const mongoClientOptions = {};
+
 
 
 //
@@ -60,7 +55,7 @@ app.use(session({
   saveUninitialized: false,
   store: MongoStore.create({
     mongoUrl: mongoUri,
-    mongoOptions: mongoClientOptions,
+    
     dbName: dbName,
     collectionName: 'user_sessions'
   }),
