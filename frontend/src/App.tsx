@@ -1,3 +1,5 @@
+/* 314Pi Mall v2 */
+import React, { useState } from 'react';
 import React, { useState } from 'react';
 import Home from './pages/Home';
 import ClassPage from './pages/Class';
