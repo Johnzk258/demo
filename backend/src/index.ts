@@ -9,6 +9,7 @@ import MongoStore from 'connect-mongo';
 import { MongoClient } from 'mongodb';
 import env from './environments';
 import mountPaymentsEndpoints from './handlers/payments';
+import mountAdminEndpoints from './handlers/admin';
 import mountUserEndpoints from './handlers/users';
 
 // We must import typedefs for ts-node-dev to pick them up when they change (even though tsc would supposedly
@@ -75,6 +76,10 @@ app.use('/payments', paymentsRouter);
 const userRouter = express.Router();
 mountUserEndpoints(userRouter);
 app.use('/user', userRouter);
+const adminRouter = express.Router();
+mountAdminEndpoints(adminRouter);
+app.use('/admin', adminRouter);
+
 
 // Hello World page to check everything works:
 app.get('/', async (_, res) => {
