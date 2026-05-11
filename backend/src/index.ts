@@ -11,6 +11,8 @@ import env from './environments';
 import mountPaymentsEndpoints from './handlers/payments';
 import mountProductsEndpoints from './handlers/products';
 import mountAdminEndpoints from './handlers/admin';
+import mountProductsEndpoints from './handlers/products';
+
 import mountUserEndpoints from './handlers/users';
 
 // We must import typedefs for ts-node-dev to pick them up when they change (even though tsc would supposedly
@@ -80,6 +82,9 @@ app.use('/user', userRouter);
 const adminRouter = express.Router();
 mountAdminEndpoints(adminRouter);
 app.use('/admin', adminRouter);
+const productsRouter = express.Router();
+mountProductsEndpoints(productsRouter);
+app.use('/products', productsRouter);
 
 
 // Hello World page to check everything works:
@@ -100,6 +105,9 @@ app.listen(8000, () => {
       const db = client.db(dbName);
       app.locals.orderCollection = db.collection('orders');
       app.locals.userCollection = db.collection('users');
+      app.locals.productCollection = db.collection('products');
+      app.locals.categoryCollection = db.collection('categories');
+
       console.log('Connected to MongoDB on: ', mongoUri.replace(/:([^@]+)@/, ':***@'));
     })
     .catch(err => {
