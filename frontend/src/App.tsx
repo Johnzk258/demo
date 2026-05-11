@@ -16,7 +16,10 @@ export type Product = {
   piPrice: number;
   category: string;
   description: string;
+  sales?: number;
+  coupon?: string;
 };
+
 
 export const products: Product[] = [
   { id: '1', name: 'Apple iPhone 15 Pro Max', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/IPhone_15_Pro_Max_Natural_Titanium.png/440px-IPhone_15_Pro_Max_Natural_Titanium.png', originalPrice: 9800, piPrice: 1, category: '数码家电', description: 'Apple最新旗舰手机' },
