@@ -5,36 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>314Pi Admin</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f2f5; color: #333; }
-    .login { max-width: 400px; margin: 100px auto; padding: 40px; background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-    .login h1 { text-align: center; margin-bottom: 24px; color: #611f69; }
-    .login input { width: 100%; padding: 12px; margin-bottom: 16px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; }
-    .login button { width: 100%; padding: 12px; background: #611f69; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; }
-    .login button:hover { background: #4a174f; }
-    .dashboard { display: none; }
-    .header { background: #611f69; color: white; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
-    .header h1 { font-size: 20px; }
-    .header button { background: rgba(255,255,255,0.2); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; }
-    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; padding: 24px; }
-    .stat-card { background: white; padding: 24px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); text-align: center; }
-    .stat-card .number { font-size: 36px; font-weight: bold; color: #611f69; }
-    .stat-card .label { color: #888; margin-top: 8px; }
-    .tabs { display: flex; gap: 0; padding: 0 24px; background: white; border-bottom: 2px solid #f0f2f5; }
-    .tab { padding: 12px 24px; cursor: pointer; border-bottom: 3px solid transparent; font-weight: 500; }
-    .tab.active { border-bottom-color: #611f69; color: #611f69; }
-    .content { padding: 24px; }
-    table { width: 100%; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-collapse: collapse; }
-    th { background: #f8f9fa; padding: 12px 16px; text-align: left; font-weight: 600; border-bottom: 2px solid #eee; }
-    td { padding: 12px 16px; border-bottom: 1px solid #f0f0f0; }
-    tr:hover { background: #f8f9fa; }
-    .badge { padding: 4px 8px; border-radius: 12px; font-size: 12px; font-weight: 600; }
-    .badge-green { background: #e8f5e9; color: #2e7d32; }
-    .badge-red { background: #ffebee; color: #c62828; }
-    .badge-yellow { background: #fff3e0; color: #e65100; }
-    .btn-delete { background: #ffebee; color: #c62828; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; }
-    .btn-delete:hover { background: #ffcdd2; }
-    .empty { text-align: center; padding: 48px; color: #888; }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f0f2f5;color:#333}
+    .login{max-width:400px;margin:100px auto;padding:40px;background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+    .login h1{text-align:center;margin-bottom:24px;color:#611f69}
+    .login input{width:100%;padding:12px;margin-bottom:16px;border:1px solid #ddd;border-radius:8px;font-size:16px}
+    .login button{width:100%;padding:12px;background:#611f69;color:#fff;border:none;border-radius:8px;font-size:16px;cursor:pointer}
+    .header{background:#611f69;color:#fff;padding:16px 24px;display:flex;justify-content:space-between;align-items:center}
+    .header h1{font-size:20px}
+    .header button{background:rgba(255,255,255,.2);color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer}
+    .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;padding:20px 24px}
+    .stat-card{background:#fff;padding:20px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.1);text-align:center}
+    .stat-card .number{font-size:28px;font-weight:bold;color:#611f69}
+    .stat-card .label{color:#888;margin-top:6px;font-size:13px}
+    .tabs{display:flex;padding:0 24px;background:#fff;border-bottom:2px solid #f0f2f5;overflow-x:auto}
+    .tab{padding:12px 20px;cursor:pointer;border-bottom:3px solid transparent;font-weight:500;white-space:nowrap;font-size:14px}
+    .tab.active{border-bottom-color:#611f69;color:#611f69}
+    .content{padding:20px 24px}
+    table{width:100%;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1);border-collapse:collapse}
+    th{background:#f8f9fa;padding:10px 12px;text-align:left;font-weight:600;border-bottom:2px solid #eee;font-size:13px}
+    td{padding:10px 12px;border-bottom:1px solid #f0f0f0;font-size:13px}
+    tr:hover{background:#f8f9fa}
+    .badge{padding:3px 8px;border-radius:12px;font-size:11px;font-weight:600}
+    .badge-green{background:#e8f5e9;color:#2e7d32}
+    .badge-red{background:#ffebee;color:#c62828}
+    .badge-yellow{background:#fff3e0;color:#e65100}
+    .btn{padding:6px 12px;border:none;border-radius:6px;cursor:pointer;font-size:12px}
+    .btn-primary{background:#611f69;color:#fff}
+    .btn-danger{background:#ffebee;color:#c62828}
+    .btn-edit{background:#e3f2fd;color:#1565c0}
+    .empty{text-align:center;padding:40px;color:#999}
+    .modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:1000}
+    .modal{background:#fff;padding:24px;border-radius:12px;width:90%;max-width:500px;max-height:80vh;overflow-y:auto}
+    .modal h2{margin-bottom:16px;color:#611f69}
+    .modal label{display:block;margin-bottom:4px;font-size:13px;font-weight:500;color:#555}
+    .modal input,.modal select,.modal textarea{width:100%;padding:10px;margin-bottom:12px;border:1px solid #ddd;border-radius:8px;font-size:14px}
+    .modal textarea{height:60px;resize:vertical}
+    .modal-buttons{display:flex;gap:10px;justify-content:flex-end;margin-top:8px}
+    .modal-buttons .btn{padding:10px 20px;font-size:14px}
+    .btn-cancel{background:#f5f5f5;color:#666}
+    img.pimg{width:40px;height:40px;object-fit:cover;border-radius:6px}
   </style>
 </head>
 <body>
@@ -43,109 +53,41 @@
     <input type="password" id="adminKey" placeholder="Enter Admin Key" onkeypress="if(event.key==='Enter')login()">
     <button onclick="login()">Login</button>
   </div>
-
-  <div class="dashboard" id="dashboard">
-    <div class="header">
-      <h1>314Pi Admin Dashboard</h1>
-      <button onclick="logout()">Logout</button>
-    </div>
+  <div id="dashboard" style="display:none">
+    <div class="header"><h1>314Pi Admin</h1><button onclick="logout()">Logout</button></div>
     <div class="stats" id="stats"></div>
     <div class="tabs">
-      <div class="tab active" onclick="switchTab('users')">Users</div>
-      <div class="tab" onclick="switchTab('orders')">Orders</div>
+      <div class="tab active" onclick="switchTab('products',this)">📦 Products</div>
+      <div class="tab" onclick="switchTab('categories',this)">📂 Categories</div>
+      <div class="tab" onclick="switchTab('users',this)">👥 Users</div>
+      <div class="tab" onclick="switchTab('orders',this)">📋 Orders</div>
     </div>
     <div class="content" id="content"></div>
   </div>
-
+  <div id="mc"></div>
   <script>
-    const API = 'https://three14pi-backend.onrender.com/admin';
-    let adminKey = localStorage.getItem('adminKey') || '';
-    let currentTab = 'users';
-
-    if (adminKey) showDashboard();
-
-    function login() {
-      adminKey = document.getElementById('adminKey').value;
-      localStorage.setItem('adminKey', adminKey);
-      showDashboard();
-    }
-
-    function logout() {
-      adminKey = '';
-      localStorage.removeItem('adminKey');
-      document.getElementById('loginPage').style.display = 'block';
-      document.getElementById('dashboard').style.display = 'none';
-    }
-
-    async function api(path) {
-      const res = await fetch(API + path, { headers: { 'admin-key': adminKey } });
-      if (res.status === 403) { logout(); alert('Invalid Admin Key'); return null; }
-      return res.json();
-    }
-
-    async function showDashboard() {
-      document.getElementById('loginPage').style.display = 'none';
-      document.getElementById('dashboard').style.display = 'block';
-      await loadStats();
-      await loadTab();
-    }
-
-    async function loadStats() {
-      const stats = await api('/stats');
-      if (!stats) return;
-      document.getElementById('stats').innerHTML = `
-        <div class="stat-card"><div class="number">${stats.totalUsers}</div><div class="label">Total Users</div></div>
-        <div class="stat-card"><div class="number">${stats.totalOrders}</div><div class="label">Total Orders</div></div>
-        <div class="stat-card"><div class="number">${stats.paidOrders}</div><div class="label">Paid Orders</div></div>
-        <div class="stat-card"><div class="number">${stats.cancelledOrders}</div><div class="label">Cancelled</div></div>
-      `;
-    }
-
-    function switchTab(tab) {
-      currentTab = tab;
-      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-      event.target.classList.add('active');
-      loadTab();
-    }
-
-    async function loadTab() {
-      if (currentTab === 'users') await loadUsers();
-      else await loadOrders();
-    }
-
-    async function loadUsers() {
-      const users = await api('/users');
-      if (!users || !users.length) { document.getElementById('content').innerHTML = '<div class="empty">No users yet</div>'; return; }
-      document.getElementById('content').innerHTML = `
-        <table><tr><th>Username</th><th>UID</th><th>Roles</th><th>Created</th><th>Action</th></tr>
-        ${users.map(u => `<tr>
-          <td>${u.username}</td><td>${u.uid}</td>
-          <td>${(u.roles||[]).join(', ')}</td>
-          <td>${u._id ? new Date(parseInt(u._id.toString().slice(0,8),16)*1000).toLocaleDateString() : '-'}</td>
-          <td><button class="btn-delete" onclick="deleteUser('${u._id}')">Delete</button></td>
-        </tr>`).join('')}</table>`;
-    }
-
-    async function loadOrders() {
-      const orders = await api('/orders');
-      if (!orders || !orders.length) { document.getElementById('content').innerHTML = '<div class="empty">No orders yet</div>'; return; }
-      document.getElementById('content').innerHTML = `
-        <table><tr><th>Payment ID</th><th>Product</th><th>User</th><th>Status</th><th>Created</th></tr>
-        ${orders.map(o => `<tr>
-          <td>${o.pi_payment_id ? o.pi_payment_id.slice(0,12) + '...' : '-'}</td>
-          <td>${o.product_id || '-'}</td>
-          <td>${o.user ? o.user.slice(0,8) + '...' : '-'}</td>
-          <td>${o.paid ? '<span class="badge badge-green">Paid</span>' : o.cancelled ? '<span class="badge badge-red">Cancelled</span>' : '<span class="badge badge-yellow">Pending</span>'}</td>
-          <td>${o.created_at ? new Date(o.created_at).toLocaleDateString() : '-'}</td>
-        </tr>`).join('')}</table>`;
-    }
-
-    async function deleteUser(id) {
-      if (!confirm('Delete this user?')) return;
-      await fetch(API + '/users/' + id, { method: 'DELETE', headers: { 'admin-key': adminKey } });
-      loadUsers();
-      loadStats();
-    }
+    const API='https://three14pi-backend.onrender.com';
+    let ak=localStorage.getItem('adminKey')||'',ct='products';
+    if(ak)showDashboard();
+    function login(){ak=document.getElementById('adminKey').value;localStorage.setItem('adminKey',ak);showDashboard()}
+    function logout(){ak='';localStorage.removeItem('adminKey');document.getElementById('loginPage').style.display='block';document.getElementById('dashboard').style.display='none'}
+    async function api(p,m='GET',b=null){const o={method:m,headers:{'admin-key':ak,'Content-Type':'application/json'}};if(b)o.body=JSON.stringify(b);const r=await fetch(API+p,o);if(r.status===403){logout();alert('Invalid Admin Key');return null}return r.json()}
+    async function showDashboard(){document.getElementById('loginPage').style.display='none';document.getElementById('dashboard').style.display='block';await loadStats();await loadTab()}
+    async function loadStats(){const[s,p,c]=await Promise.all([api('/admin/stats'),api('/products'),api('/products/categories')]);if(!s)return;document.getElementById('stats').innerHTML=`<div class="stat-card"><div class="number">${p?.length||0}</div><div class="label">Products</div></div><div class="stat-card"><div class="number">${c?.length||0}</div><div class="label">Categories</div></div><div class="stat-card"><div class="number">${s.totalUsers}</div><div class="label">Users</div></div><div class="stat-card"><div class="number">${s.paidOrders}</div><div class="label">Paid Orders</div></div>`}
+    function switchTab(t,el){ct=t;document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));el.classList.add('active');loadTab()}
+    async function loadTab(){if(ct==='products')await loadProducts();else if(ct==='categories')await loadCategories();else if(ct==='users')await loadUsers();else await loadOrders()}
+    async function loadProducts(){const[p,c]=await Promise.all([api('/products'),api('/products/categories')]);if(!p)return;const cm={};(c||[]).forEach(x=>cm[x.name]=x.icon);document.getElementById('content').innerHTML=`<div style="margin-bottom:12px"><button class="btn btn-primary" onclick="showPM()">+ Add Product</button></div>`+(p.length===0?'<div class="empty">No products yet</div>':`<table><tr><th>Img</th><th>Name</th><th>Category</th><th>π Price</th><th>¥ Original</th><th>Actions</th></tr>${p.map(x=>`<tr><td><img class="pimg" src="${x.image||''}" onerror="this.style.display='none'"></td><td>${x.name}</td><td>${cm[x.category]||''} ${x.category}</td><td>π${x.piPrice}</td><td style="text-decoration:line-through;color:#999">¥${x.originalPrice}</td><td><button class="btn btn-edit" onclick='showPM(${JSON.stringify(x).replace(/'/g,"&#39;")})'>Edit</button> <button class="btn btn-danger" onclick="delP('${x._id}')">Del</button></td></tr>`).join('')}</table>`)}
+    function showPM(p=null){const e=!!p;document.getElementById('mc').innerHTML=`<div class="modal-overlay" onclick="if(event.target===this)closeM()"><div class="modal"><h2>${e?'Edit':'Add'} Product</h2><label>Name</label><input id="pN" value="${p?.name||''}"><label>Image URL</label><input id="pI" value="${p?.image||''}"><label>Category</label><input id="pC" value="${p?.category||''}"><label>Description</label><textarea id="pD">${p?.description||''}</textarea><label>Pi Price</label><input id="pP" type="number" step="0.01" value="${p?.piPrice||1}"><label>Original Price ¥</label><input id="pO" type="number" value="${p?.originalPrice||0}"><label>Sales</label><input id="pS" type="number" value="${p?.sales||0}"><label>Coupon</label><input id="pCo" value="${p?.coupon||''}"><div class="modal-buttons"><button class="btn btn-cancel" onclick="closeM()">Cancel</button><button class="btn btn-primary" onclick="saveP('${p?._id||''}')">${e?'Update':'Create'}</button></div></div></div>`}
+    async function saveP(id){const b={name:document.getElementById('pN').value,image:document.getElementById('pI').value,category:document.getElementById('pC').value,description:document.getElementById('pD').value,piPrice:parseFloat(document.getElementById('pP').value)||1,originalPrice:parseFloat(document.getElementById('pO').value)||0,sales:parseInt(document.getElementById('pS').value)||0,coupon:document.getElementById('pCo').value};if(id)await api('/products/'+id,'PATCH',b);else await api('/products','POST',b);closeM();loadProducts();loadStats()}
+    async function delP(id){if(!confirm('Delete this product?'))return;await api('/products/'+id,'DELETE');loadProducts();loadStats()}
+    async function loadCategories(){const c=await api('/products/categories');if(!c)return;document.getElementById('content').innerHTML=`<div style="margin-bottom:12px"><button class="btn btn-primary" onclick="showCM()">+ Add Category</button></div>`+(c.length===0?'<div class="empty">No categories yet</div>':`<table><tr><th>Icon</th><th>Name</th><th>Description</th><th>Actions</th></tr>${c.map(x=>`<tr><td style="font-size:24px">${x.icon}</td><td>${x.name}</td><td>${x.desc||''}</td><td><button class="btn btn-danger" onclick="delC('${x._id}')">Delete</button></td></tr>`).join('')}</table>`)}
+    function showCM(){document.getElementById('mc').innerHTML=`<div class="modal-overlay" onclick="if(event.target===this)closeM()"><div class="modal"><h2>Add Category</h2><label>Name</label><input id="cN" placeholder="e.g. 数码家电"><label>Icon (emoji)</label><input id="cI" placeholder="e.g. 📱"><label>Description</label><input id="cD" placeholder="e.g. 智能家居一站式体验"><div class="modal-buttons"><button class="btn btn-cancel" onclick="closeM()">Cancel</button><button class="btn btn-primary" onclick="saveC()">Create</button></div></div></div>`}
+    async function saveC(){await api('/products/categories','POST',{name:document.getElementById('cN').value,icon:document.getElementById('cI').value,desc:document.getElementById('cD').value});closeM();loadCategories();loadStats()}
+    async function delC(id){if(!confirm('Delete this category?'))return;await api('/products/categories/'+id,'DELETE');loadCategories();loadStats()}
+    async function loadUsers(){const u=await api('/admin/users');if(!u)return;document.getElementById('content').innerHTML=u.length===0?'<div class="empty">No users yet</div>':`<table><tr><th>Username</th><th>UID</th><th>Roles</th><th>Actions</th></tr>${u.map(x=>`<tr><td>${x.username}</td><td>${x.uid}</td><td>${(x.roles||[]).join(', ')}</td><td><button class="btn btn-danger" onclick="delU('${x._id}')">Delete</button></td></tr>`).join('')}</table>`}
+    async function delU(id){if(!confirm('Delete this user?'))return;await api('/admin/users/'+id,'DELETE');loadUsers();loadStats()}
+    async function loadOrders(){const o=await api('/admin/orders');if(!o)return;document.getElementById('content').innerHTML=o.length===0?'<div class="empty">No orders yet</div>':`<table><tr><th>Payment ID</th><th>Product</th><th>User</th><th>Status</th></tr>${o.map(x=>`<tr><td>${(x.pi_payment_id||'').slice(0,12)}...</td><td>${x.product_id||'-'}</td><td>${(x.user||'').slice(0,8)}...</td><td>${x.paid?'<span class="badge badge-green">Paid</span>':x.cancelled?'<span class="badge badge-red">Cancelled</span>':'<span class="badge badge-yellow">Pending</span>'}</td></tr>`).join('')}</table>`}
+    function closeM(){document.getElementById('mc').innerHTML=''}
   </script>
 </body>
 </html>
