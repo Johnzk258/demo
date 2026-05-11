@@ -9,10 +9,8 @@ import MongoStore from 'connect-mongo';
 import { MongoClient } from 'mongodb';
 import env from './environments';
 import mountPaymentsEndpoints from './handlers/payments';
-import mountProductsEndpoints from './handlers/products';
 import mountAdminEndpoints from './handlers/admin';
 import mountProductsEndpoints from './handlers/products';
-
 import mountUserEndpoints from './handlers/users';
 
 // We must import typedefs for ts-node-dev to pick them up when they change (even though tsc would supposedly
