@@ -67,7 +67,7 @@ const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
         {page === 'class' && <ClassPage onProductClick={goToDetail} />}
         {page === 'cart' && <Cart items={cartItems} setItems={setCartItems} />}
         {page === 'mine' && <Mine />}
-        {page === 'detail' && selectedProduct && <ProductDetail product={selectedProduct} onBack={goBack} />}
+        {page === 'detail' && selectedProduct && <ProductDetail product={selectedProduct} onBack={goBack} onAddToCart={addToCart} />}
       </div>
       {page !== 'detail' && (
         <nav className="bottom-nav">
@@ -80,8 +80,10 @@ const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
             <span className="nav-label">Class</span>
           </div>
           <div className={`nav-item ${page === 'cart' ? 'active' : ''}`} onClick={() => setPage('cart')}>
-            <span className="nav-icon">🛒</span>
-            <span className="nav-label">Cart</span>
+           <span className="nav-icon">🛒</span>
+           {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
+           <span className="nav-label">Cart</span>
+
           </div>
           <div className={`nav-item ${page === 'mine' ? 'active' : ''}`} onClick={() => setPage('mine')}>
             <span className="nav-icon">👤</span>
