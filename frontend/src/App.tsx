@@ -53,8 +53,8 @@ export default function App() {
       <div className="page-content">
         {page === 'home' && <Home onProductClick={goToDetail} />}
         {page === 'class' && <ClassPage onProductClick={goToDetail} />}
-        {page === 'cart' && <Cart />}
-        {page === 'mine' && <Mine onBack={goBack} />}
+        {page === 'cart' && <Cart items={cartItems} setItems={setCartItems} />}
+        {page === 'mine' && <Mine />}
         {page === 'detail' && selectedProduct && <ProductDetail product={selectedProduct} onBack={goBack} />}
       </div>
       {page !== 'detail' && (
