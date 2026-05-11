@@ -9,6 +9,7 @@ import MongoStore from 'connect-mongo';
 import { MongoClient } from 'mongodb';
 import env from './environments';
 import mountPaymentsEndpoints from './handlers/payments';
+import mountProductsEndpoints from './handlers/products';
 import mountAdminEndpoints from './handlers/admin';
 import mountUserEndpoints from './handlers/users';
 
