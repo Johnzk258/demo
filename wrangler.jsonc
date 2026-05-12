@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "dark-credit-eb7a",
+  "compatibility_date": "2026-05-12",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": "admin"
+  },
+  "compatibility_flags": [
+    "nodejs_compat"
+  ]
+}
