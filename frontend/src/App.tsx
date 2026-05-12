@@ -1,12 +1,29 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import Home from './pages/Home';
 import ClassPage from './pages/Class';
 import Cart from './pages/Cart';
-import Mine from './pages/Mine';
-import ProductDetail from './pages/ProductDetail';
+import <Mine user={user} onSignIn={handleSignIn} onSignOut={handleSignOut} />/pages/Mine';
+import <ProductDetail product={selectedProduct} onBack={goBack} onAddToCart={addToCart} onBuyWithPi={buyWithPi} />pages/ProductDetail';
 import './App.css';
 
 type Page = 'home' | 'class' | 'cart' | 'mine' | 'detail';
+type User = {
+  uid: string,
+  username: string
+};
+
+interface WindowWithEnv extends Window {
+  __ENV?: {
+    backendURL: string,
+    sandbox: "true" | "false",
+  }
+}
+
+const _window: WindowWithEnv = window;
+const backendURL = _window.__ENV && _window.__ENV.backendURL;
+const axiosClient = axios.create({ baseURL: `${backendURL}`, timeout: 20000, withCredentials: true });
+const config = { headers: { 'Content-Type': 'application/json' } };
 
 export type Product = {
   id: string;
@@ -41,6 +58,35 @@ export default function App() {
   const [page, setPage] = useState<Page>('home');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [cartItems, setCartItems] = useState<{product: Product, quantity: number}[]>([]);
+  const [user, setUser] = useState<User | null>(null);
+
+const handleSignIn = (user: User) => { setUser(user); };
+const handleSignOut = () => { setUser(null); axiosClient.get('/user/signout'); };
+
+const onIncompletePaymentFound = (payment: any) => {
+  return axiosClient.post('/payments/incomplete', { payment });
+};
+const onReadyForServerApproval = (paymentId: string) => {
+  axiosClient.post('/payments/approve', { paymentId }, config);
+};
+const onReadyForServerCompletion = (paymentId: string, txid: string) => {
+  axiosClient.post('/payments/complete', { paymentId, txid }, config);
+};
+const onCancel = (paymentId: string) => {
+  axiosClient.post('/payments/cancelled_payment', { paymentId });
+};
+const onError = (error: Error, payment?: any) => {
+  console.log("onError", error);
+};
+
+const buyWithPi = async (product: Product) => {
+  if (!user) { setPage('mine'); return; }
+  const paymentData = { amount: product.piPrice, memo: `Order ${product.name}`, metadata: { productId: product.id } };
+  const callbacks = { onReadyForServerApproval, onReadyForServerCompletion, onCancel, onError };
+  const payment = await window.Pi.createPayment(paymentData, callbacks);
+  console.log(payment);
+};
+
 const addToCart = (product: Product) => {
   setCartItems(prev => {
     const existing = prev.find(item => item.product.id === product.id);
