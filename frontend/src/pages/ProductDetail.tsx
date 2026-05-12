@@ -1,7 +1,8 @@
 import React from 'react';
 import { Product } from '../App';
 
-export default function ProductDetail({ product, onBack, onAddToCart }: { product: Product; onBack: () => void; onAddToCart: (p: Product) => void }) {
+export default function ProductDetail({ product, onBack, onAddToCart, onBuyWithPi }: { product: Product; onBack: () => void; onAddToCart: (p: Product) => void; onBuyWithPi: (p: Product) => void }) {
+
   return (
     <div>
       <div className="detail-header">
@@ -35,7 +36,7 @@ export default function ProductDetail({ product, onBack, onAddToCart }: { produc
 
       <div className="detail-bottom">
         <button className="btn-cart" onClick={() => onAddToCart(product)}>Add to Cart</button>
-        <button className="btn-buy" onClick={() => onAddToCart(product)}>Buy Now</button>
+        <button className="btn-buy" onClick={() => onBuyWithPi(product)}>Buy Now</button>
       </div>
     </div>
   );
