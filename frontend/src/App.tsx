@@ -67,7 +67,7 @@ export default function App() {
   const [user, setUser] = useState<User | null>(null);
   useEffect(() => {
   if (window.Pi) {
-    window.Pi.init({ version: "2.0", sandbox: true });
+    window.Pi.init({ version: "2.0", sandbox: false });
     console.log("Pi SDK initialized");
   }
 }, []);
