@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import Home from './pages/Home';
 import ClassPage from './pages/Class';
 import Cart from './pages/Cart';
-import <Mine user={user} onSignIn={handleSignIn} onSignOut={handleSignOut} />/pages/Mine';
-import <ProductDetail product={selectedProduct} onBack={goBack} onAddToCart={addToCart} onBuyWithPi={buyWithPi} />pages/ProductDetail';
+import Mine from './pages/Mine';
+import ProductDetail from './pages/ProductDetail';
 import './App.css';
 
 type Page = 'home' | 'class' | 'cart' | 'mine' | 'detail';
@@ -115,8 +115,8 @@ const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
         {page === 'home' && <Home onProductClick={goToDetail} />}
         {page === 'class' && <ClassPage onProductClick={goToDetail} />}
         {page === 'cart' && <Cart items={cartItems} setItems={setCartItems} />}
-        {page === 'mine' && <Mine />}
-        {page === 'detail' && selectedProduct && <ProductDetail product={selectedProduct} onBack={goBack} onAddToCart={addToCart} />}
+        {page === 'mine' && <Mine user={user} onSignIn={handleSignIn} onSignOut={handleSignOut} />}
+        {page === 'detail' && selectedProduct && <ProductDetail product={selectedProduct} onBack={goBack} onAddToCart={addToCart} onBuyWithPi={buyWithPi} />}
       </div>
       {page !== 'detail' && (
         <nav className="bottom-nav">
