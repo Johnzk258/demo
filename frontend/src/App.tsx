@@ -54,6 +54,12 @@ export const categories = [
   { name: '时尚', icon: '👗', desc: '潮流前线' },
 ];
 
+declare global {
+  interface Window {
+    Pi: any;
+  }
+}
+
 export default function App() {
   const [page, setPage] = useState<Page>('home');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
