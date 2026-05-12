@@ -42,6 +42,12 @@
 
     <!-- Import the Pi Network App Platform SDK: -->
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+    <script>
+  window.__ENV = {
+    backendURL: 'https://api.314pi.dpdns.org',
+    sandbox: 'true'
+  };
+</script>
     
     <!-- TODO make sandbox conditional to env (dev / prod) -->
     <script>
