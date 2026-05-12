@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Home from './pages/Home';
 import ClassPage from './pages/Class';
 import Cart from './pages/Cart';
@@ -59,7 +59,13 @@ export default function App() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [cartItems, setCartItems] = useState<{product: Product, quantity: number}[]>([]);
   const [user, setUser] = useState<User | null>(null);
-
+  useEffect(() => {
+  if (window.Pi) {
+    window.Pi.init({ version: "2.0", sandbox: true });
+    console.log("Pi SDK initialized");
+  }
+}, []);
+  
 const handleSignIn = (user: User) => { setUser(user); };
 const handleSignOut = () => { setUser(null); axiosClient.get('/user/signout'); };
 
@@ -78,11 +84,17 @@ const onError = (error: Error, payment?: any) => {
 
 const buyWithPi = async (product: Product) => {
   if (!user) { setPage('mine'); return; }
-  const paymentData = { amount: product.piPrice, memo: `Order ${product.name}`, metadata: { productId: product.id } };
-  const callbacks = { onReadyForServerApproval, onReadyForServerCompletion, onCancel, onError };
-  const payment = await window.Pi.createPayment(paymentData, callbacks);
-  console.log(payment);
+  try {
+    console.log("Starting payment for:", product.name);
+    const paymentData = { amount: product.piPrice, memo: `Order ${product.name}`, metadata: { productId: product.id } };
+    const callbacks = { onReadyForServerApproval, onReadyForServerCompletion, onCancel, onError };
+    const payment = await window.Pi.createPayment(paymentData, callbacks);
+    console.log("Payment result:", payment);
+  } catch (error) {
+    console.log("Payment error:", error);
+  }
 };
+
 
 const addToCart = (product: Product) => {
   setCartItems(prev => {
