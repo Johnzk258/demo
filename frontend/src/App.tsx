@@ -63,9 +63,6 @@ export default function App() {
 const handleSignIn = (user: User) => { setUser(user); };
 const handleSignOut = () => { setUser(null); axiosClient.get('/user/signout'); };
 
-const onIncompletePaymentFound = (payment: any) => {
-  return axiosClient.post('/payments/incomplete', { payment });
-};
 const onReadyForServerApproval = (paymentId: string) => {
   axiosClient.post('/payments/approve', { paymentId }, config);
 };
