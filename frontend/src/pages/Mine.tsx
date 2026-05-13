@@ -99,8 +99,8 @@ export default function Mine({ user, onSignIn, onSignOut }: { user: User | null,
             {orders.map((order) => (
               <div key={order.id} style={{background:'#fff', borderRadius:'12px', padding:'16px', marginBottom:'12px', boxShadow:'0 1px 4px rgba(0,0,0,0.08)'}}>
                 <div style={{display:'flex', justifyContent:'space-between', marginBottom:'8px'}}>
-                  <span style={{fontWeight:'bold'}}>{order.memo || order.product_id}</span>
-                  <span>{getStatusText(order.status)}</span>
+                  <span style={{fontWeight:'bold'}}>{order.product_id}</span>
+                  <span>{getStatusText(order)}</span>
                 </div>
                 <div style={{display:'flex', justifyContent:'space-between', color:'#666', fontSize:'14px'}}>
                   <span>{order.amount} Pi</span>
@@ -137,7 +137,7 @@ export default function Mine({ user, onSignIn, onSignOut }: { user: User | null,
             {orders.filter(o => o.status === 'completed').map((order) => (
               <div key={order.id} style={{background:'#fff', borderRadius:'12px', padding:'16px', marginBottom:'12px', boxShadow:'0 1px 4px rgba(0,0,0,0.08)'}}>
                 <div style={{display:'flex', justifyContent:'space-between', marginBottom:'8px'}}>
-                  <span style={{fontWeight:'bold'}}>{order.memo || order.product_id}</span>
+                  <span style={{fontWeight:'bold'}}>{order.product_id}</span>
                   <span style={{color:'#27ae60'}}>✅ {order.amount} Pi</span>
                 </div>
                 <div style={{color:'#666', fontSize:'14px'}}>
