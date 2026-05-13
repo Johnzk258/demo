@@ -63,15 +63,12 @@ export default function Mine({ user, onSignIn, onSignOut }: { user: User | null,
     }
   }, [subPage]);
 
-  const getStatusText = (status: string) => {
-    switch (status) {
-      case 'pending': return '⏳ Pending';
-      case 'completed': return '✅ Completed';
-      case 'cancelled': return '❌ Cancelled';
-      case 'incomplete': return '⚠️ Incomplete';
-      default: return status;
-    }
+  const getStatusText = (order: any) => {
+    if (order.cancelled === 1) return '❌ Cancelled';
+    if (order.paid === 1) return '✅ Completed';
+    return '⏳ Pending';
   };
+
 
   const menuItems = [
     { icon: '📦', text: 'My Orders', page: 'orders' },
