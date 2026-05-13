@@ -219,5 +219,5 @@ export default function Mine({ user, onSignIn, onSignOut }: { user: User | null,
       </div>
     </div>
   );
-}
+} 
 
