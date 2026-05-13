@@ -43,10 +43,13 @@
        <!-- Import the Pi Network App Platform SDK: -->
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     
+        <!-- Import the Pi Network App Platform SDK: -->
+    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+    
     <script>
       window.__ENV = {
-        backendURL: 'https://api.314pi.dpdns.org',
-        sandbox: 'false'
+        backendURL: "%REACT_APP_BACKEND_URL%",
+        sandbox: "%REACT_APP_SANDBOX_SDK%",
       };
       
       // Init Pi SDK only if loaded
@@ -55,6 +58,7 @@
         Pi.init({ version: "2.0", sandbox: runSDKInSandboxMode });
       }
     </script>
+
    
     <script>
   window.__ENV = {
